@@ -12,10 +12,11 @@ git clone <repo-url>
 cd Isuna-Product-API
 ```
 
-### 2. Start the container
+### 2. Install dependencies
 
 ```bash
-docker compose up -d --build
+docker run --rm -v $(PWD):/app -w /app composer:2.8 install --ignore-platform-reqs --no-interaction
+```ompose up -d --build
 ```
 
 ### 3. Copy environment file
@@ -24,10 +25,11 @@ docker compose up -d --build
 cp .env.example .env
 ```
 
-### 4. Install dependencies
+
+### 4. Start the container
 
 ```bash
-docker run --rm -v $(PWD):/app -w /app composer:2.8 install --ignore-platform-reqs --no-interaction
+docker compose up -d --build
 ```
 
 ### 5. Generate app key
