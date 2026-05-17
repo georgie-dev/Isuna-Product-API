@@ -9,7 +9,7 @@
 
 ```bash
 git clone <repo-url>
-cd product-api
+cd Isuna-Product-API
 ```
 
 ### 2. Start the container
@@ -27,7 +27,7 @@ cp .env.example .env
 ### 4. Install dependencies
 
 ```bash
-docker compose exec app composer install
+docker run --rm -v $(PWD):/app -w /app composer:2.8 install --ignore-platform-reqs --no-interaction
 ```
 
 ### 5. Generate app key
@@ -49,7 +49,7 @@ The app will be running at **http://localhost:8000**
 ## .env Example
 
 ```env
-APP_NAME=Isuna_Product_API
+APP_NAME=Isuna-Product-API
 APP_ENV=local
 APP_DEBUG=true
 APP_URL=http://localhost:8000
