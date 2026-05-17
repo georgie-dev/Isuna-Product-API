@@ -1,0 +1,787 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/register
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Register a new user'
+      description: 'Creates a new user account and returns an API token.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: "The user's full name."
+        required: true
+        example: George
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      email:
+        custom: []
+        name: email
+        description: "The user's email address."
+        required: true
+        example: george@test.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: "The user's password (min 8 characters)."
+        required: true
+        example: password
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password_confirmation:
+        custom: []
+        name: password_confirmation
+        description: 'Must match the password field.'
+        required: true
+        example: password
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: George
+      email: george@test.com
+      password: password
+      password_confirmation: password
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "user": {
+              "id": 1,
+              "name": "George",
+              "email": "george@test.com",
+              "created_at": "2026-05-16 17:00:00",
+              "updated_at": "2026-05-16 17:00:00"
+            },
+            "token": "1|ezFqbCLoX6kwfITwUb9rCrHyXkOhHLh2Y5BW9ojE491acf71"
+          }
+        headers: []
+        description: 'Registration successful'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Validation failed.",
+            "errors": {
+              "email": ["The email has already been taken."],
+              "password": ["The password field confirmation does not match."]
+            }
+          }
+        headers: []
+        description: 'Validation error'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/login
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Login
+      description: 'Authenticates a user and returns an API token.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        custom: []
+        name: email
+        description: "The user's email address."
+        required: true
+        example: george@test.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      password:
+        custom: []
+        name: password
+        description: "The user's password."
+        required: true
+        example: password
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      email: george@test.com
+      password: password
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "user": {
+              "id": 1,
+              "name": "George",
+              "email": "george@test.com",
+              "created_at": "2026-05-16 17:00:00",
+              "updated_at": "2026-05-16 17:00:00"
+            },
+            "token": "1|ezFqbCLoX6kwfITwUb9rCrHyXkOhHLh2Y5BW9ojE491acf71"
+          }
+        headers: []
+        description: 'Login successful'
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Validation failed.",
+            "errors": {
+              "email": ["The provided credentials are incorrect."]
+            }
+          }
+        headers: []
+        description: 'Invalid credentials'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/logout
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: Logout
+      description: "Revokes the current user's API token."
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Logged out successfully."
+          }
+        headers: []
+        description: 'Logout successful'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated. Please provide a valid token."
+          }
+        headers: []
+        description: Unauthenticated
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/products
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'List all products'
+      description: 'Returns a paginated list of products. Supports search, filtering, and sorting.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters:
+      search:
+        custom: []
+        name: search
+        description: 'Search by name or description.'
+        required: false
+        example: chair
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      min_price:
+        custom: []
+        name: min_price
+        description: 'Filter by minimum price.'
+        required: false
+        example: 10.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      max_price:
+        custom: []
+        name: max_price
+        description: 'Filter by maximum price.'
+        required: false
+        example: 500.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      in_stock:
+        custom: []
+        name: in_stock
+        description: 'Filter to only in-stock products.'
+        required: false
+        example: true
+        type: boolean
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_by:
+        custom: []
+        name: sort_by
+        description: 'Sort by field (price, created_at, name).'
+        required: false
+        example: price
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      sort_dir:
+        custom: []
+        name: sort_dir
+        description: 'Sort direction (asc, desc).'
+        required: false
+        example: asc
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      page:
+        custom: []
+        name: page
+        description: 'Page number.'
+        required: false
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanQueryParameters:
+      search: chair
+      min_price: 10.0
+      max_price: 500.0
+      in_stock: true
+      sort_by: price
+      sort_dir: asc
+      page: 1
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": [
+              {
+                "id": "019e319c-f361-723e-9a3a-74362624ac38",
+                "name": "Premium Chair",
+                "description": "Designed for maximum comfort and durability.",
+                "price": 99.99,
+                "stock": 50,
+                "created_at": "2026-05-16 17:00:00",
+                "updated_at": "2026-05-16 17:00:00"
+              }
+            ],
+            "links": {
+              "first": "http://localhost:8000/api/v1/products?page=1",
+              "last": "http://localhost:8000/api/v1/products?page=5",
+              "prev": null,
+              "next": "http://localhost:8000/api/v1/products?page=2"
+            },
+            "meta": {
+              "current_page": 1,
+              "per_page": 15,
+              "total": 75
+            }
+          }
+        headers: []
+        description: Success
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/products/{product_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Get a product'
+      description: 'Returns a single product by ID.'
+      authenticated: false
+      deprecated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      product_id:
+        custom: []
+        name: product_id
+        description: 'The ID of the product.'
+        required: true
+        example: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      product_id: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": "019e319c-f361-723e-9a3a-74362624ac38",
+              "name": "Premium Chair",
+              "description": "A very comfortable chair.",
+              "price": 99.99,
+              "stock": 50,
+              "created_at": "2026-05-16 17:00:00",
+              "updated_at": "2026-05-16 17:00:00"
+            }
+          }
+        headers: []
+        description: Success
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Resource not found."
+          }
+        headers: []
+        description: 'Product not found'
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/products
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create a product'
+      description: 'Creates a new product. Requires authentication.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The product name.'
+        required: true
+        example: 'Premium Chair'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the product.'
+        required: false
+        example: 'A very comfortable chair.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      price:
+        custom: []
+        name: price
+        description: 'The product price.'
+        required: true
+        example: 99.99
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      stock:
+        custom: []
+        name: stock
+        description: 'The available stock quantity.'
+        required: true
+        example: 50
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Premium Chair'
+      description: 'A very comfortable chair.'
+      price: 99.99
+      stock: 50
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: |-
+          {
+            "data": {
+              "id": "019e319c-f361-723e-9a3a-74362624ac38",
+              "name": "Premium Chair",
+              "description": "A very comfortable chair.",
+              "price": 99.99,
+              "stock": 50,
+              "created_at": "2026-05-16 17:00:00",
+              "updated_at": "2026-05-16 17:00:00"
+            }
+          }
+        headers: []
+        description: 'Product created'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated. Please provide a valid token."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 422
+        content: |-
+          {
+            "message": "Validation failed.",
+            "errors": {
+              "name": ["The name field is required."],
+              "price": ["The price field is required."]
+            }
+          }
+        headers: []
+        description: 'Validation error'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+    uri: 'api/v1/products/{product_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update a product'
+      description: 'Updates an existing product. Requires authentication.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      product_id:
+        custom: []
+        name: product_id
+        description: 'The ID of the product.'
+        required: true
+        example: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      product_id: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'The product name.'
+        required: false
+        example: 'Premium Chair'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'A brief description of the product.'
+        required: false
+        example: 'A very comfortable chair.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: true
+        deprecated: false
+      price:
+        custom: []
+        name: price
+        description: 'The product price.'
+        required: false
+        example: 99.99
+        type: number
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+      stock:
+        custom: []
+        name: stock
+        description: 'The available stock quantity.'
+        required: false
+        example: 50
+        type: integer
+        enumValues: []
+        exampleWasSpecified: true
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Premium Chair'
+      description: 'A very comfortable chair.'
+      price: 99.99
+      stock: 50
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "data": {
+              "id": "019e319c-f361-723e-9a3a-74362624ac38",
+              "name": "Premium Chair",
+              "description": "A very comfortable chair.",
+              "price": 149.99,
+              "stock": 30,
+              "created_at": "2026-05-16 17:00:00",
+              "updated_at": "2026-05-16 17:30:00"
+            }
+          }
+        headers: []
+        description: 'Product updated'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated. Please provide a valid token."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Resource not found."
+          }
+        headers: []
+        description: 'Product not found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/products/{product_id}'
+    metadata:
+      custom: []
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete a product'
+      description: 'Soft deletes a product. Requires authentication.'
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      product_id:
+        custom: []
+        name: product_id
+        description: 'The ID of the product.'
+        required: true
+        example: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      product_id: 019e354b-3b7f-723d-bedc-7f36eeae25fe
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: |-
+          {
+            "message": "Product deleted successfully."
+          }
+        headers: []
+        description: 'Product deleted'
+      -
+        custom: []
+        status: 401
+        content: |-
+          {
+            "message": "Unauthenticated. Please provide a valid token."
+          }
+        headers: []
+        description: Unauthenticated
+      -
+        custom: []
+        status: 404
+        content: |-
+          {
+            "message": "Resource not found."
+          }
+        headers: []
+        description: 'Product not found'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
